@@ -11,12 +11,9 @@ def get_firestore_service() -> FirestoreService:
     return FirestoreService(collection_name=settings.FIRESTORE_COLLECTION)
 
 
-def get_session_service(
-    firestore: FirestoreService = None,
-) -> SessionService:
+def get_session_service() -> SessionService:
     """セッションサービスを取得"""
-    if firestore is None:
-        firestore = get_firestore_service()
+    firestore = get_firestore_service()
     return SessionService(firestore=firestore)
 
 
