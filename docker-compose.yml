@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: deps
+    working_dir: /app
+    command: npx next dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/next.config.js:/app/next.config.js
+      - ./frontend/tailwind.config.ts:/app/tailwind.config.ts
+      - ./frontend/tsconfig.json:/app/tsconfig.json
+      - ./frontend/postcss.config.mjs:/app/postcss.config.mjs
+    env_file:
+      - ./frontend/.env.local
+    environment:
+      - BACKEND_API_URL=http://backend:8000
+    depends_on:
+      - backend
+
+  backend:
+    image: python:3.12-slim
+    working_dir: /app/src
+    command: >
+      bash -c "pip install --no-cache-dir -r /app/requirements.txt &&
+               uvicorn main:app --host 0.0.0.0 --port 8000 --reload --reload-dir /app/src"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/requirements.txt:/app/requirements.txt
+    env_file:
+      - ./backend/.env
+    environment:
+      - CORS_ORIGINS=["http://localhost:3000"]
