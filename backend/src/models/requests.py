@@ -37,3 +37,9 @@ class UpdateProcedureRequest(BaseModel):
     is_completed: bool = Field(alias="isCompleted")
 
     model_config = ConfigDict(populate_by_name=True)
+
+
+class ChatRequest(BaseModel):
+    """チャットリクエスト"""
+
+    message: str = Field(min_length=1, max_length=500)

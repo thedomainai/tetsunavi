@@ -80,6 +80,7 @@ export interface Procedure {
   priority: ProcedurePriority
   deadline: Deadline
   estimatedDuration: number
+  visitLocation?: string
   isCompleted: boolean
   completedAt?: string
 }

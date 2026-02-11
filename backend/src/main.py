@@ -12,7 +12,7 @@ from core.config import settings
 from core.logging import setup_logging
 from core.middleware import RequestLoggingMiddleware
 from core.exceptions import AppError
-from api.v1 import sessions, interview, procedures, timeline
+from api.v1 import sessions, interview, procedures, timeline, chat
 
 # ロギング設定
 setup_logging(log_level=settings.LOG_LEVEL)
@@ -104,6 +104,7 @@ app.include_router(sessions.router, prefix="/api/v1", tags=["sessions"])
 app.include_router(interview.router, prefix="/api/v1", tags=["interview"])
 app.include_router(procedures.router, prefix="/api/v1", tags=["procedures"])
 app.include_router(timeline.router, prefix="/api/v1", tags=["timeline"])
+app.include_router(chat.router, prefix="/api/v1", tags=["chat"])
 
 
 # ヘルスチェック

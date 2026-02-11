@@ -122,3 +122,18 @@ class TimelineResponse(BaseModel):
     """タイムラインレスポンス"""
 
     data: TimelineData
+
+
+class ChatResponseData(BaseModel):
+    """チャットレスポンスデータ"""
+
+    reply: str
+    suggested_questions: List[str] = Field(alias="suggestedQuestions", default_factory=list)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class ChatResponse(BaseModel):
+    """チャットレスポンス"""
+
+    data: ChatResponseData

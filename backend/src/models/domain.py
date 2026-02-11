@@ -211,6 +211,9 @@ class Procedure(BaseModel):
     deadline: Deadline
     estimated_duration: int = Field(alias="estimatedDuration", ge=0)
 
+    # 訪問先（グルーピング用）
+    visit_location: Optional[str] = Field(alias="visitLocation", default=None)
+
     # 詳細情報（lazy load）
     documents: Optional[List[Document]] = None
     office: Optional[Office] = None

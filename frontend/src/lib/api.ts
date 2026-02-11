@@ -115,6 +115,20 @@ class APIClient {
   async getTimeline(sessionId: string): Promise<Timeline> {
     return this.request<Timeline>(`/sessions/${sessionId}/timeline`)
   }
+
+  // チャット関連
+  async sendChatMessage(
+    sessionId: string,
+    message: string
+  ): Promise<{ reply: string; suggestedQuestions: string[] }> {
+    return this.request<{ reply: string; suggestedQuestions: string[] }>(
+      `/sessions/${sessionId}/chat`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ message }),
+      }
+    )
+  }
 }
 
 export const apiClient = new APIClient()

@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/button'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { ErrorMessage } from '@/components/shared/error-message'
 import { EmptyState } from '@/components/shared/empty-state'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Download } from 'lucide-react'
+import { downloadICS } from '@/lib/ics-generator'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -64,12 +65,21 @@ export default function TimelinePage({ params }: PageProps) {
               引越し日を基準に、いつ何をすべきかを時系列で確認できます。
             </p>
           </div>
-          <Button asChild variant="outline">
-            <Link href={`/sessions/${sessionId}/procedures`}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              手続きリスト
-            </Link>
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => downloadICS(data)}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              カレンダーに追加
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={`/sessions/${sessionId}/procedures`}>
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                手続きリスト
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {mergedItems.length === 0 ? (
