@@ -30,9 +30,9 @@ export default function InterviewPage({ params }: PageProps) {
   const handleSubmit = () => {
     if (!data) return
 
-    // 必須質問の回答チェック
+    // 必須質問の回答チェック（false も有効な回答）
     const unansweredRequired = data.questions.filter(
-      (q) => q.required && !answers[q.id]
+      (q) => q.required && answers[q.id] === undefined
     )
 
     if (unansweredRequired.length > 0) {
