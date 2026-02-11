@@ -13,8 +13,11 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
 
+    # モックモード（GCP なしで動作）
+    MOCK_MODE: bool = True
+
     # Google Cloud
-    GOOGLE_CLOUD_PROJECT: str
+    GOOGLE_CLOUD_PROJECT: str = ""
     FIRESTORE_COLLECTION: str = "sessions"
 
     # Vertex AI
