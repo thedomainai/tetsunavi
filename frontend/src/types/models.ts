@@ -85,12 +85,12 @@ export interface Procedure {
 }
 
 export interface ProcedureDetail extends Procedure {
-  documents: Document[]
-  office: Office
-  steps: Step[]
-  notes: string[]
-  relatedLinks: RelatedLink[]
-  dependencies: string[]
+  documents?: Document[]
+  office?: Office
+  steps?: Step[]
+  notes?: string[]
+  relatedLinks?: RelatedLink[]
+  dependencies?: string[]
 }
 
 // タイムライン型

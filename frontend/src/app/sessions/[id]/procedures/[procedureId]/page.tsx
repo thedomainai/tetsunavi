@@ -84,11 +84,15 @@ export default function ProcedureDetailPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        <StepList steps={procedure.steps} />
+        {procedure.steps && procedure.steps.length > 0 && (
+          <StepList steps={procedure.steps} />
+        )}
 
-        <DocumentList documents={procedure.documents} />
+        {procedure.documents && procedure.documents.length > 0 && (
+          <DocumentList documents={procedure.documents} />
+        )}
 
-        <OfficeInfo office={procedure.office} />
+        {procedure.office && <OfficeInfo office={procedure.office} />}
 
         {procedure.relatedLinks && procedure.relatedLinks.length > 0 && (
           <Card>
