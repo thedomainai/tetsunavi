@@ -18,6 +18,9 @@ COPY src/ ./src/
 RUN useradd -m -u 1001 appuser
 USER appuser
 
-EXPOSE 8000
+# Cloud Run は PORT 環境変数を使用
+ENV PORT=8000
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE ${PORT}
+
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT} --app-dir src
