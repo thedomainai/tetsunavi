@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Card, CardContent } from '@/components/ui/card'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { ErrorMessage } from '@/components/shared/error-message'
-import { ArrowLeft, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ExternalLink, MessageCircle } from 'lucide-react'
 
 interface PageProps {
   params: Promise<{ id: string; procedureId: string }>
@@ -55,12 +55,20 @@ export default function ProcedureDetailPage({ params }: PageProps) {
   return (
     <div className="container py-12">
       <div className="max-w-4xl mx-auto space-y-6">
-        <Button asChild variant="ghost" size="sm">
-          <Link href={`/sessions/${sessionId}/procedures`}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            手続きリストに戻る
-          </Link>
-        </Button>
+        <div className="flex items-center justify-between">
+          <Button asChild variant="ghost" size="sm">
+            <Link href={`/sessions/${sessionId}/procedures`}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              手続きリストに戻る
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/sessions/${sessionId}/chat`}>
+              <MessageCircle className="mr-1.5 h-4 w-4" />
+              この手続きについて質問
+            </Link>
+          </Button>
+        </div>
 
         <ProcedureDetailComponent procedure={procedure} />
 
@@ -116,6 +124,10 @@ export default function ProcedureDetailPage({ params }: PageProps) {
             </CardContent>
           </Card>
         )}
+
+        <p className="text-xs text-muted-foreground text-center py-4">
+          ※ 表示内容は一般的なガイドです。詳細は転入先の自治体にご確認ください。
+        </p>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { APP_NAME } from '@/lib/constants'
+import { Compass } from 'lucide-react'
 
 export function Header() {
   const pathname = usePathname()
@@ -13,7 +13,8 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold text-xl">{APP_NAME}</span>
+            <Compass className="h-6 w-6 text-primary" />
+            <span className="font-bold text-xl">テツナビ</span>
           </Link>
         </div>
         <nav className="flex items-center space-x-6 text-sm font-medium">

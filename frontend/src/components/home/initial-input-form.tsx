@@ -10,7 +10,7 @@ import { Select } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { PREFECTURES } from '@/lib/constants'
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, ArrowRight } from 'lucide-react'
 
 interface FormData {
   moveFrom: {
@@ -48,9 +48,9 @@ export function InitialInputForm() {
       <div className="container px-4 md:px-6">
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
-            <CardTitle>引越し情報を入力</CardTitle>
-            <CardDescription>
-              まずは基本的な引越し情報を教えてください。その後、詳細な質問にお答えいただきます。
+            <CardTitle className="text-2xl">引越し情報を入力</CardTitle>
+            <CardDescription className="text-base">
+              3つの情報を入力するだけで、あなた専用の手続きリストを作成します。
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -152,9 +152,15 @@ export function InitialInputForm() {
                     処理中...
                   </>
                 ) : (
-                  '次へ進む'
+                  <>
+                    手続きナビを開始する
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
                 )}
               </Button>
+              <p className="text-xs text-center text-muted-foreground">
+                約2分で完了 / 会員登録不要
+              </p>
             </form>
           </CardContent>
         </Card>
