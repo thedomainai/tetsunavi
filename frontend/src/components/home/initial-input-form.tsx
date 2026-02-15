@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreateSessionSchema } from '@/lib/validators'
@@ -10,6 +11,7 @@ import { Select } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { PREFECTURES } from '@/lib/constants'
+import { MUNICIPALITIES } from '@/lib/municipalities'
 import { AlertCircle, ArrowRight } from 'lucide-react'
 
 interface FormData {
@@ -29,10 +31,32 @@ export function InitialInputForm() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(CreateSessionSchema),
+    defaultValues: {
+      moveFrom: { prefecture: '', city: '' },
+      moveTo: { prefecture: '', city: '' },
+      moveDate: '',
+    },
   })
+
+  const moveFromPrefecture = watch('moveFrom.prefecture')
+  const moveToPrefecture = watch('moveTo.prefecture')
+
+  // 都道府県変更時に市区町村をリセット
+  useEffect(() => {
+    setValue('moveFrom.city', '')
+  }, [moveFromPrefecture, setValue])
+
+  useEffect(() => {
+    setValue('moveTo.city', '')
+  }, [moveToPrefecture, setValue])
+
+  const moveFromCities = moveFromPrefecture ? MUNICIPALITIES[moveFromPrefecture] ?? [] : []
+  const moveToCities = moveToPrefecture ? MUNICIPALITIES[moveToPrefecture] ?? [] : []
 
   const onSubmit = (data: FormData) => {
     createSession(data)
@@ -45,7 +69,7 @@ export function InitialInputForm() {
 
   return (
     <section className="w-full py-12">
-      <div className="container px-4 md:px-6">
+      <div className="container">
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
             <CardTitle className="text-2xl">引越し情報を入力</CardTitle>
@@ -81,11 +105,20 @@ export function InitialInputForm() {
                     <label htmlFor="moveFrom.city" className="text-sm font-medium">
                       市区町村
                     </label>
-                    <Input
+                    <Select
                       {...register('moveFrom.city')}
                       id="moveFrom.city"
-                      placeholder="例: 渋谷区"
-                    />
+                      disabled={!moveFromPrefecture}
+                    >
+                      <option value="">
+                        {moveFromPrefecture ? '選択してください' : '都道府県を先に選択'}
+                      </option>
+                      {moveFromCities.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </Select>
                     {errors.moveFrom?.city && (
                       <p className="text-sm text-destructive">{errors.moveFrom.city.message}</p>
                     )}
@@ -117,7 +150,20 @@ export function InitialInputForm() {
                     <label htmlFor="moveTo.city" className="text-sm font-medium">
                       市区町村
                     </label>
-                    <Input {...register('moveTo.city')} id="moveTo.city" placeholder="例: 新宿区" />
+                    <Select
+                      {...register('moveTo.city')}
+                      id="moveTo.city"
+                      disabled={!moveToPrefecture}
+                    >
+                      <option value="">
+                        {moveToPrefecture ? '選択してください' : '都道府県を先に選択'}
+                      </option>
+                      {moveToCities.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </Select>
                     {errors.moveTo?.city && (
                       <p className="text-sm text-destructive">{errors.moveTo.city.message}</p>
                     )}

@@ -3,7 +3,7 @@ import { MapPin, MessageCircle, CalendarCheck } from 'lucide-react'
 export function HeroSection() {
   return (
     <section className="w-full py-16 md:py-28 lg:py-36 bg-gradient-to-b from-primary/5 to-background">
-      <div className="container px-4 md:px-6">
+      <div className="container">
         <div className="flex flex-col items-center space-y-6 text-center">
           <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm text-muted-foreground">
             Powered by Gemini 2.0 Flash

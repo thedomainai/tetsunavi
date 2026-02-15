@@ -43,7 +43,7 @@ const features = [
 export function FeatureList() {
   return (
     <section className="w-full py-16 bg-muted/50">
-      <div className="container px-4 md:px-6">
+      <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-3">テツナビの特徴</h2>
           <p className="text-muted-foreground max-w-[600px] mx-auto">
