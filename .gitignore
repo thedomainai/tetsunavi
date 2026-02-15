@@ -16,3 +16,6 @@ Thumbs.db
 # Agent work
 .agent-work/
 .claude/
+
+# Internal docs
+judging-criteria.md

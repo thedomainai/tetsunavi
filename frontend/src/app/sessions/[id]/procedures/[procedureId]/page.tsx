@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Card, CardContent } from '@/components/ui/card'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { ErrorMessage } from '@/components/shared/error-message'
-import { ArrowLeft, ExternalLink, MessageCircle } from 'lucide-react'
+import { ArrowLeft, ExternalLink, FileText, MessageCircle } from 'lucide-react'
 
 interface PageProps {
   params: Promise<{ id: string; procedureId: string }>
@@ -71,6 +71,28 @@ export default function ProcedureDetailPage({ params }: PageProps) {
         </div>
 
         <ProcedureDetailComponent procedure={procedure} />
+
+        {/* 書類作成ボタン */}
+        <Card className="border-blue-200 bg-blue-50/50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                  <FileText className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-sm">AIで書類を作成</p>
+                  <p className="text-xs text-muted-foreground">セッション情報から自動入力された書類を生成します</p>
+                </div>
+              </div>
+              <Button asChild size="sm">
+                <Link href={`/sessions/${sessionId}/procedures/${procedureId}/document`}>
+                  書類を作成
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         <Card>
           <CardContent className="pt-6">

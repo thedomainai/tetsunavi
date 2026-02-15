@@ -3,5 +3,5 @@ export default function SessionLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <div className="w-full">{children}</div>
+  return <div className="w-full pt-16">{children}</div>
 }

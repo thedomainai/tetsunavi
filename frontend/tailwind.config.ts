@@ -13,6 +13,13 @@ const config: Config = {
       padding: {
         DEFAULT: '1rem',
         md: '1.5rem',
+        lg: '2rem',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
       },
     },
     extend: {
@@ -55,6 +62,35 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'slide-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.6s ease-out',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'scale-in': 'scale-in 0.5s ease-out',
+        'slide-in-right': 'slide-in-right 0.5s ease-out',
+        shimmer: 'shimmer 3s ease-in-out infinite',
       },
     },
   },

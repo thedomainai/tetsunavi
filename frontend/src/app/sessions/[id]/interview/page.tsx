@@ -94,7 +94,7 @@ export default function InterviewPage({ params }: PageProps) {
             <QuestionCard
               key={question.id}
               question={question}
-              value={answers[question.id] || (question.type === 'multiple_choice' ? [] : '')}
+              value={answers[question.id] ?? (question.type === 'multiple_choice' ? [] : '')}
               onChange={(value) => handleAnswerChange(question.id, value)}
             />
           ))}
